@@ -2,7 +2,7 @@
 यह मेरा पर्सनल पोर्टफोलियो है जिसे मैंने अपनी स्किल्स, प्रोजेक्ट्स और क्रिएटिविटी को दिखाने के लिए बनाया है। इसमें AI Integration, 3D Web Development, और Modern UI/UX Design का इस्तेमाल किया गया है।
 
 🌐 Live Demo
-आप इसे यहाँ लाइव देख सकते हैं: [आपका-vercel-लिंक-यहाँ-डालें]
+आप इसे यहाँ लाइव देख सकते हैं: https://amit-kumar-portfolio-nine.vercel.app/
 
 ✨ Key Features
 Custom Particle Background: Canvas API का उपयोग करके बनाया गया डायनामिक इंटरैक्टिव बैकग्राउंड।
