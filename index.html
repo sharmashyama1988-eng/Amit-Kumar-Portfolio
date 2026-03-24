@@ -424,17 +424,61 @@ t.innerHTML=h+h;
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});},{threshold:.1});
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 
-/* EMAILJS */
-emailjs.init("Kj2TJTng1JMiA2MDw");
-document.getElementById('contactForm').addEventListener('submit',function(e){
+/* EMAILJS INIT */
+// आपकी Public Key के साथ इनिशियलाइज़ किया गया
+emailjs.init("Kj2TJTng1JMiA2MDw"); 
+
+document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  const n=document.getElementById('from_name').value.trim(),em=document.getElementById('from_email').value.trim(),msg=document.getElementById('message').value.trim();
-  const btn=document.getElementById('submitBtn'),st=document.getElementById('fst');
-  if(!n||!em||!msg){st.style.display='block';st.style.background='rgba(239,68,68,.15)';st.style.color='#FCA5A5';st.textContent='⚠ Please fill in all fields.';return;}
-  btn.disabled=true;btn.textContent='Sending…';st.style.display='none';
-  emailjs.send("service_tex9e1o","template_uhi1sbj",{from_name:n,from_email:em,message:msg,to_email:'amitk100831@gmail.com',reply_to:em})
-    .then(()=>{btn.textContent='✓ Sent!';btn.style.background='linear-gradient(135deg,#059669,#10b981)';st.style.display='block';st.style.background='rgba(16,185,129,.1)';st.style.color='#6ee7b7';st.textContent='✓ Message sent! Amit will get back to you soon.';document.getElementById('contactForm').reset();setTimeout(()=>{btn.disabled=false;btn.textContent='Send Message →';btn.style.background='';},4000);},
-    ()=>{btn.disabled=false;btn.textContent='Send Message →';st.style.display='block';st.style.background='rgba(239,68,68,.15)';st.style.color='#FCA5A5';st.textContent='✗ Failed. Email: amitk100831@gmail.com';});
+  
+  const n = document.getElementById('from_name').value.trim();
+  const em = document.getElementById('from_email').value.trim();
+  const msg = document.getElementById('message').value.trim();
+  const btn = document.getElementById('submitBtn');
+  const st = document.getElementById('fst');
+  
+  if(!n || !em || !msg) {
+    st.style.display = 'block';
+    st.style.background = 'rgba(239,68,68,.15)';
+    st.style.color = '#FCA5A5';
+    st.textContent = '⚠ Please fill in all fields.';
+    return;
+  }
+  
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  st.style.display = 'none';
+
+  // आपकी Service ID और Template ID का उपयोग
+  emailjs.send("service_tex9e1o", "template_uhi1sbj", {
+    from_name: n,
+    from_email: em,
+    message: msg,
+    to_email: 'amitk100831@gmail.com', // आपका ईमेल
+    reply_to: em
+  })
+  .then(() => {
+    btn.textContent = '✓ Sent!';
+    btn.style.background = 'linear-gradient(135deg,#059669,#10b981)';
+    st.style.display = 'block';
+    st.style.background = 'rgba(16,185,129,.1)';
+    st.style.color = '#6ee7b7';
+    st.textContent = '✓ Message sent! Amit will get back to you soon.';
+    document.getElementById('contactForm').reset();
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.textContent = 'Send Message →';
+      btn.style.background = '';
+    }, 4000);
+  }, (error) => {
+    console.error("EmailJS Error:", error);
+    btn.disabled = false;
+    btn.textContent = 'Send Message →';
+    st.style.display = 'block';
+    st.style.background = 'rgba(239,68,68,.15)';
+    st.style.color = '#FCA5A5';
+    st.textContent = '✗ Failed. Email: amitk100831@gmail.com';
+  });
 });
 </script>
 </body>
