@@ -1,0 +1,6 @@
+# All search engines are allowed to crawl the site
+User-agent: *
+Allow: /
+
+# Sitemap location (Google को रास्ता दिखाने के लिए)
+Sitemap: https://amit-kumar-portfolio-nine.vercel.app/sitemap.xml
