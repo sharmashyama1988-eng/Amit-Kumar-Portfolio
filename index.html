@@ -423,42 +423,39 @@ t.innerHTML=h+h;
 /* SCROLL REVEAL */
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});},{threshold:.1});
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
-/* DEBUGGING SCRIPT */
+/* FINAL FIX SCRIPT */
 emailjs.init("Kj2TJTng1JMiA2MDw"); 
 
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
+  
   const btn = document.getElementById('submitBtn');
   const st = document.getElementById('fst');
   
   btn.disabled = true;
   btn.textContent = 'Sending…';
+  st.style.display = 'none';
 
-  const templateParams = {
-    from_name: document.getElementById('from_name').value,
-    from_email: document.getElementById('from_email').value,
-    message: document.getElementById('message').value
-  };
-
-  console.log("Sending with params:", templateParams); // Debugging line
-
-  emailjs.send("service_tex9e1o", "template_uhi1sbj", templateParams)
-    .then((response) => {
-       console.log('SUCCESS!', response.status, response.text);
-       btn.textContent = '✓ Sent!';
-       st.style.display = 'block';
-       st.style.background = 'rgba(16,185,129,.1)';
-       st.style.color = '#6ee7b7';
-       st.textContent = '✓ Message sent!';
-       document.getElementById('contactForm').reset();
+  // sendForm सीधे आपके HTML फॉर्म का डेटा उठा लेता है
+  emailjs.sendForm("service_tex9e1o", "template_uhi1sbj", this)
+    .then(() => {
+      btn.textContent = '✓ Sent!';
+      st.style.display = 'block';
+      st.style.background = 'rgba(16,185,129,.1)';
+      st.style.color = '#6ee7b7';
+      st.textContent = '✓ Message sent! Check your inbox.';
+      this.reset(); // फॉर्म खाली करें
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = 'Send Message →';
+      }, 4000);
     }, (error) => {
-       console.error('FAILED...', error); // यह असली एरर दिखाएगा
-       btn.disabled = false;
-       btn.textContent = 'Send Message →';
-       st.style.display = 'block';
-       st.style.background = 'rgba(239,68,68,.15)';
-       st.style.color = '#FCA5A5';
-       st.textContent = '✗ Error: ' + JSON.stringify(error);
+      console.error("FAILED...", error);
+      btn.disabled = false;
+      btn.textContent = 'Send Message →';
+      st.style.display = 'block';
+      st.style.background = 'rgba(239,68,68,.15)';
+      st.textContent = '✗ Error: ' + error.text;
     });
 });
 </script>
