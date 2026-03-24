@@ -423,39 +423,33 @@ t.innerHTML=h+h;
 /* SCROLL REVEAL */
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});},{threshold:.1});
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
-/* FINAL FIX SCRIPT */
+/* FINAL WORKING SCRIPT */
 emailjs.init("Kj2TJTng1JMiA2MDw"); 
 
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  
   const btn = document.getElementById('submitBtn');
   const st = document.getElementById('fst');
   
   btn.disabled = true;
   btn.textContent = 'Sending…';
-  st.style.display = 'none';
 
-  // sendForm सीधे आपके HTML फॉर्म का डेटा उठा लेता है
+  // sendForm सबसे बेस्ट तरीका है
   emailjs.sendForm("service_tex9e1o", "template_uhi1sbj", this)
     .then(() => {
       btn.textContent = '✓ Sent!';
       st.style.display = 'block';
       st.style.background = 'rgba(16,185,129,.1)';
       st.style.color = '#6ee7b7';
-      st.textContent = '✓ Message sent! Check your inbox.';
-      this.reset(); // फॉर्म खाली करें
-      setTimeout(() => {
-        btn.disabled = false;
-        btn.textContent = 'Send Message →';
-      }, 4000);
+      st.textContent = '✓ Message sent! Amit will check it soon.';
+      this.reset();
+      setTimeout(() => { btn.disabled = false; btn.textContent = 'Send Message →'; }, 4000);
     }, (error) => {
-      console.error("FAILED...", error);
       btn.disabled = false;
       btn.textContent = 'Send Message →';
       st.style.display = 'block';
       st.style.background = 'rgba(239,68,68,.15)';
-      st.textContent = '✗ Error: ' + error.text;
+      st.textContent = '✗ Error: Check Variables';
     });
 });
 </script>
