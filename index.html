@@ -365,13 +365,22 @@ footer p{font-size:.78rem;color:var(--g3);}
           </a>
         </div>
       </div>
-      <form class="cf rv d2" id="contactForm">
-        <div class="fg"><label class="fl">Your Name</label><input type="text" class="fi" id="from_name" placeholder="John Doe" required></div>
-        <div class="fg"><label class="fl">Email Address</label><input type="email" class="fi" id="from_email" placeholder="john@company.com" required></div>
-        <div class="fg"><label class="fl">Message</label><textarea class="ft" id="message" placeholder="Tell me about your project..." required></textarea></div>
-        <button type="submit" class="bsub" id="submitBtn">Send Message →</button>
-        <div id="fst"></div>
-      </form>
+<form class="cf rv d2" id="contactForm">
+  <div class="fg">
+    <label class="fl">Your Name</label>
+    <input type="text" class="fi" id="from_name" name="from_name" placeholder="John Doe" required>
+  </div>
+  <div class="fg">
+    <label class="fl">Email Address</label>
+    <input type="email" class="fi" id="from_email" name="from_email" placeholder="john@company.com" required>
+  </div>
+  <div class="fg">
+    <label class="fl">Message</label>
+    <textarea class="ft" id="message" name="message" placeholder="Tell me about your project..." required></textarea>
+  </div>
+  <button type="submit" class="bsub" id="submitBtn">Send Message →</button>
+  <div id="fst"></div>
+</form>
     </div>
   </div>
 </section>
@@ -423,7 +432,7 @@ t.innerHTML=h+h;
 /* SCROLL REVEAL */
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});},{threshold:.1});
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
-/* FINAL WORKING SCRIPT */
+/* FINAL FIX */
 emailjs.init("Kj2TJTng1JMiA2MDw"); 
 
 document.getElementById('contactForm').addEventListener('submit', function(e) {
@@ -434,7 +443,7 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   btn.disabled = true;
   btn.textContent = 'Sending…';
 
-  // sendForm सबसे बेस्ट तरीका है
+  // "this" का मतलब है ऊपर वाला #contactForm
   emailjs.sendForm("service_tex9e1o", "template_uhi1sbj", this)
     .then(() => {
       btn.textContent = '✓ Sent!';
@@ -445,11 +454,12 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
       this.reset();
       setTimeout(() => { btn.disabled = false; btn.textContent = 'Send Message →'; }, 4000);
     }, (error) => {
+      console.error("FAILED...", error);
       btn.disabled = false;
       btn.textContent = 'Send Message →';
       st.style.display = 'block';
       st.style.background = 'rgba(239,68,68,.15)';
-      st.textContent = '✗ Error: Check Variables';
+      st.textContent = '✗ Error. Please try again.';
     });
 });
 </script>
