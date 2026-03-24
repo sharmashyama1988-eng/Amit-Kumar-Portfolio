@@ -425,14 +425,14 @@ const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.ta
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 
 /* EMAILJS */
-emailjs.init("YOUR_PUBLIC_KEY");
+emailjs.init("Kj2TJTng1JMiA2MDw");
 document.getElementById('contactForm').addEventListener('submit',function(e){
   e.preventDefault();
   const n=document.getElementById('from_name').value.trim(),em=document.getElementById('from_email').value.trim(),msg=document.getElementById('message').value.trim();
   const btn=document.getElementById('submitBtn'),st=document.getElementById('fst');
   if(!n||!em||!msg){st.style.display='block';st.style.background='rgba(239,68,68,.15)';st.style.color='#FCA5A5';st.textContent='⚠ Please fill in all fields.';return;}
   btn.disabled=true;btn.textContent='Sending…';st.style.display='none';
-  emailjs.send("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID",{from_name:n,from_email:em,message:msg,to_email:'amitk100831@gmail.com',reply_to:em})
+  emailjs.send("service_tex9e1o","template_uhi1sbj",{from_name:n,from_email:em,message:msg,to_email:'amitk100831@gmail.com',reply_to:em})
     .then(()=>{btn.textContent='✓ Sent!';btn.style.background='linear-gradient(135deg,#059669,#10b981)';st.style.display='block';st.style.background='rgba(16,185,129,.1)';st.style.color='#6ee7b7';st.textContent='✓ Message sent! Amit will get back to you soon.';document.getElementById('contactForm').reset();setTimeout(()=>{btn.disabled=false;btn.textContent='Send Message →';btn.style.background='';},4000);},
     ()=>{btn.disabled=false;btn.textContent='Send Message →';st.style.display='block';st.style.background='rgba(239,68,68,.15)';st.style.color='#FCA5A5';st.textContent='✗ Failed. Email: amitk100831@gmail.com';});
 });
